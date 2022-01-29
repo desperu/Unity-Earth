@@ -5,17 +5,19 @@ using UnityEngine;
 public class EarthRotation : MonoBehaviour
 {
 
-    public Vector3 localRotationSpeed;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private float speed = 40f;
+
+	// Update is called once per frame
+	private void Update() {
+        gameObject.transform.Rotate(0f, speed * Time.deltaTime, 0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        this.transform.Rotate(localRotationSpeed * Time.deltaTime, Space.Self);
+	public void CallFromAndroidWithNoMessage() {
+        speed = speed * 2;
+    }
+	
+	public void CallFromAndroidWithMessage(string value) {
+		speed = float.Parse(value);
+        Debug.Log($"Coming from Android: {value}");
     }
 }
